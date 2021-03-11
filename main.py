@@ -1,16 +1,14 @@
-# This is a sample Python script.
+#!/usr/bin/python
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import password_policy_checker as checker
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def run(filename, length, uppercase, lowercase, special, digit, c8, s_u_e_d):
+    print("[+] Starting program...")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    file_content = checker.get_file_content(filename)
+    result_from_analysis = checker.password_policy_checker(file_content, length, uppercase, lowercase, special, digit, c8, s_u_e_d)
+    checker.find_percentage(len(file_content), result_from_analysis)
+
+    print("[+] Program finished...")
+

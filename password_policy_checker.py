@@ -48,14 +48,44 @@ def find_percentage(total, result):
     return x
 
 
+# Is specifically made to iterate over list of functions to check if a condition is false
+def is_list_true(list, arg):
+    for element in list:
+        if not element(arg):
+            return False
+
+    return True
+
+
 # Takes a password list and checks how many passwords matches the given policy
-def password_policy_checker(password_list):
-    print("[+] Checking passwords against policy")
+# Function argument c8 = comprehensive8, s_u_e_d = start with uppercase and en with digit
+def password_policy_checker(password_list, length, uppercase, lowercase, special, digit, c8, s_u_e_d):
+    print("[+] Checking passwords against criteria")
+
+    criteria_list = []
+    if uppercase:
+        criteria_list.append(policies.contain_uppercase)
+    if lowercase:
+        criteria_list.append(policies.contain_lowercase)
+    if special:
+        criteria_list.append(policies.contain_special_character)
+    if digit:
+        criteria_list.append(policies.contain_digit)
+    if c8:
+        criteria_list.append(policies.contain_all_classes)
+    if s_u_e_d:
+        criteria_list.append(policies.start_with_uppercase_end_with_digit)
+
     number_of_password_matches = 0
     for password in password_list:
-        if len(password) >= 8 and policies.start_with_uppercase_end_with_digit(password):
-            number_of_password_matches = number_of_password_matches + 1
-            print("\r[+] Number of password hits " + str(number_of_password_matches), end="")
+        if len(criteria_list) >= 1:
+            if len(password) >= length and is_list_true(criteria_list, password):
+                number_of_password_matches = number_of_password_matches + 1
+                print("\r[+] Number of password hits " + str(number_of_password_matches), end="")
+        else:
+            if len(password) >= length:
+                number_of_password_matches = number_of_password_matches + 1
+                print("\r[+] Number of password hits " + str(number_of_password_matches), end="")
     print()
     return number_of_password_matches
 
@@ -84,8 +114,8 @@ def print_total_len_list(password_list, list_name="default value"):
 def get_hash_from_file(file_name):
     hashes = []
     hits = 0
-    check_list = get_file_content(file_name)
-    for i in check_list:
+    file_content = get_file_content(file_name)
+    for i in file_content:
         hashes.append(policies.get_hash(i))
         hits = hits + 1
         print("\r[+] Number of password hits " + str(hits), end="")
@@ -138,7 +168,7 @@ if __name__ == "__main__":
 
     # ==============================================================================================================
 
-    passwords_matching_policy = password_policy_checker(check_list)
+    passwords_matching_policy = password_policy_checker(check_list, 11, False, False, False, False, False, False)
     find_percentage(len(check_list), passwords_matching_policy)
 
     # ==============================================================================================================
