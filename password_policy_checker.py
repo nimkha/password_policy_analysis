@@ -49,20 +49,18 @@ def find_percentage(total, result):
 
 
 # Is specifically made to iterate over list of functions to check if a condition is false
-def is_list_true(list, arg):
-    for element in list:
+def is_list_true(policy_list, arg):
+    for element in policy_list:
         if not element(arg):
             return False
 
     return True
 
 
-# Takes a password list and checks how many passwords matches the given policy
-# Function argument c8 = comprehensive8, s_u_e_d = start with uppercase and en with digit
-def password_policy_checker(password_list, length, uppercase, lowercase, special, digit, c8, s_u_e_d):
-    print("[+] Checking passwords against criteria")
-
+# Gathers all criteria in list
+def get_criteria(uppercase, lowercase, special, digit, all_classes, s_u_e_d, start_upper, end_digit):
     criteria_list = []
+
     if uppercase:
         criteria_list.append(policies.contain_uppercase)
     if lowercase:
@@ -71,10 +69,24 @@ def password_policy_checker(password_list, length, uppercase, lowercase, special
         criteria_list.append(policies.contain_special_character)
     if digit:
         criteria_list.append(policies.contain_digit)
-    if c8:
+    if all_classes:
         criteria_list.append(policies.contain_all_classes)
     if s_u_e_d:
         criteria_list.append(policies.start_with_uppercase_end_with_digit)
+    if start_upper:
+        criteria_list.append(policies.start_with_uppercase)
+    if end_digit:
+        criteria_list.append(policies.end_with_digit)
+
+    return criteria_list
+
+
+# Takes a password list and checks how many passwords matches the given policy
+# Function argument all_classes = all character classes, s_u_e_d = start with uppercase and en with digit
+def password_policy_checker(password_list, length, uppercase, lowercase, special, digit, all_classes, s_u_e_d, start_upper, end_digit):
+    print("[+] Checking passwords against criteria")
+
+    criteria_list = get_criteria(uppercase, lowercase, special, digit, all_classes, s_u_e_d, start_upper, end_digit)
 
     number_of_password_matches = 0
     for password in password_list:
@@ -159,7 +171,7 @@ if __name__ == "__main__":
     # openwall_passwords = get_file_content("Passwords/SecLists/openwall.net-all.txt")
     # xato_passwords = get_file_content("Passwords/SecLists/xato-net-10-million-passwords-1000000.txt")
     # xato_passwords_dup = get_file_content("Passwords/SecLists/xato-net-10-million-passwords-dup.txt")
-    check_list = ["Passw0rd!", "Password1", "password", "P@ssw0rd!1"]
+    check_list = ["Passw0rd!", "Password1", "password", "P@ssw0rd!1", "passWd"]
 
     # ==============================================================================================================
 
@@ -168,7 +180,7 @@ if __name__ == "__main__":
 
     # ==============================================================================================================
 
-    passwords_matching_policy = password_policy_checker(check_list, 11, False, False, False, False, False, False)
+    passwords_matching_policy = password_policy_checker(check_list, 7, False, False, False, False, False, False, True, True)
     find_percentage(len(check_list), passwords_matching_policy)
 
     # ==============================================================================================================

@@ -5,6 +5,22 @@
 import re
 
 
+# Checks if string ends with a digit
+def end_with_digit(string):
+    if string[-1].isdigit():
+        return True
+    else:
+        return False
+
+
+# Checks if string starts with an uppercase character
+def start_with_uppercase(string):
+    if string[0].isupper():
+        return True
+    else:
+        return False
+
+
 # Takes a regex and string as inputs and check if there is a match
 def check_regex_matches(regex, string):
     if regex.search(string):
