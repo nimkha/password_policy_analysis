@@ -23,4 +23,4 @@ The example searches for passwords with a minimum character length 12 containing
 The special characters inlcude " !"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 
 ### Example result
-!Example use](Images/example_use.png "Example use")
+[![Example use](Images/example_use.png "Example use")
