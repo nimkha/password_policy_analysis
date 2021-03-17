@@ -55,7 +55,7 @@ def contain_special_character(string):
         regex = re.compile("[\s!\"#$%&'()*+,-./:;<=>?@\[\]^_`{|}~]")
         return check_regex_matches(regex, string)
     else:
-        print("[-] Missing string in function 'contain_special_character'")
+        print("[-] Invalid string value in function 'contain_special_character'")
         exit()
 
 

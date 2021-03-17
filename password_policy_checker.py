@@ -3,8 +3,8 @@
 # This script is made to calculate the percentage of passwords in a given policy
 
 import password_policies as policies
-# from charset_normalizer import CharsetNormalizerMatches as CnM
-# from charset_normalizer import detect
+from charset_normalizer import CharsetNormalizerMatches as CnM
+from charset_normalizer import detect
 
 
 # Returns file content from a file as a list using encoding="utf-8" as default
@@ -136,52 +136,37 @@ def get_hash_from_file(file_name):
 
 
 # Tries to find correct encoding for a text file and writes new file if found using utf-8
-# def normalize(text_file):
-#     try:
-#         CnM.normalize(text_file)  # should write to disk my_subtitle-***.srt
-#     except IOError as e:
-#         print('Sadly, we are unable to perform charset normalization.', str(e))
+def normalize(text_file):
+    try:
+        CnM.normalize(text_file)  # should write to disk my_subtitle-***.srt
+    except IOError as e:
+        print('Sadly, we are unable to perform charset normalization.', str(e))
 
 # ======================================================================================
+
 
 if __name__ == "__main__":
 
     print("[+] Starting program...")
     # ==============================================================================================================
 
-    # crackstation_passwords = get_file_content("crackstation-human-only.txt")
-
     # passwords = get_file_content("Passwords_without_duplicates/passwords_without_duplicates.txt")
-    # linkedin_passwords = get_file_content("Passwords_without_duplicates/linkedin_passwords_without_duplicates_utf8.txt")
-    # seclist_passwords = get_file_content("Passwords_without_duplicates/seclist_passwords_without_duplicates_utf8.txt")
-    # rockyou_passwords_without_duplicates = get_file_content("Passwords/RockYou/rockyou-cp1125.txt")
+    linkedin_passwords = get_file_content("Passwords_without_duplicates/linkedin_passwords_without_duplicates_utf8.txt")
+    seclist_passwords = get_file_content("Passwords_without_duplicates/seclist_passwords_without_duplicates_utf8.txt")
+    rockyou_passwords_without_duplicates = get_file_content("Passwords/RockYou/rockyou-cp1125.txt")
+    pawned = get_file_content("Passwords_without_duplicates/cracked_passwords.txt")
 
-    # rockyou_passwords = get_file_content("Passwords/RockYou/rockyou-cp1125.txt")
-    # linkedin1_passwords = get_file_content("Passwords/LinkedIn/linkedin.txt")
-    # linkedin2_passwords = get_file_content("Passwords/LinkedIn/linked2.txt")
-    # all_passwords_with_duplicates = get_file_content("all_passwords_with_duplicates.txt")
-
-    # webost_passwords = get_file_content("Passwords/SecLists/000webhost.txt")
-    # top_10_million_passwords = get_file_content("Passwords/SecLists/10-million-password-list-top-1000000.txt")
-    # gmail_passwords = get_file_content("Passwords/SecLists/alleged-gmail-passwords.txt")
-    # bt4_passwords = get_file_content("Passwords/SecLists/bt4-password.txt")
-    # darkcode_passwords = get_file_content("Passwords/SecLists/darkc0de.txt")
-    # darkweb_passwords = get_file_content("Passwords/SecLists/darkweb2017-top10000.txt")
-    # md5_passwords = get_file_content("Passwords/SecLists/md5decryptor-uk.txt")
-    # openwall_passwords = get_file_content("Passwords/SecLists/openwall.net-all.txt")
-    # xato_passwords = get_file_content("Passwords/SecLists/xato-net-10-million-passwords-1000000.txt")
-    # xato_passwords_dup = get_file_content("Passwords/SecLists/xato-net-10-million-passwords-dup.txt")
     check_list = ["Passw0rd!", "Password1", "password", "P@ssw0rd!1", "passWd"]
 
     # ==============================================================================================================
 
-    # passwords = seclist_passwords + linkedin_passwords + rockyou_passwords_without_duplicates
-    # write_list_to_file(without, "Passwords_without_duplicates/passwords_without_duplicates_utf8.txt")
+    passwords = seclist_passwords + linkedin_passwords + rockyou_passwords_without_duplicates + pawned
+    write_list_to_file(passwords, "Passwords_without_duplicates/passwords_without_duplicates_utf8.txt")
 
     # ==============================================================================================================
 
-    passwords_matching_policy = password_policy_checker(check_list, 7, False, False, False, False, False, False, True, True)
-    find_percentage(len(check_list), passwords_matching_policy)
+    # passwords_matching_policy = password_policy_checker(check_list, 7, False, False, False, False, False, False, True, True)
+    # find_percentage(len(check_list), passwords_matching_policy)
 
     # ==============================================================================================================
 
