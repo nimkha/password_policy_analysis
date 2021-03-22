@@ -21,11 +21,12 @@ parser.add_argument("-a", "--all", help="Checks if password satisfy all criteria
 parser.add_argument("--startUendD", help="Checks if password starts with uppercase and end with digit", action="store_true")
 parser.add_argument("--startUppercase", help="Checks if password start with uppercase", action="store_true")
 parser.add_argument("--endDigit", help="Checks if password end with digit", action="store_true")
+parser.add_argument("--encoding", help="Chose what kind of encoding the password file is. Default is utf-8", choices=["utf-8", "utf-16", "iso-8859-15"])
 
 args = parser.parse_args()
 
 if 1 <= args.length <= 20:
-    main.run(args.file, args.length, args.uppercase, args.lowercase, args.special, args.digit, args.all, args.startUendD, args.startUppercase, args.endDigit)
+    main.run(args.file, args.length, args.uppercase, args.lowercase, args.special, args.digit, args.all, args.startUendD, args.startUppercase, args.endDigit, args.encoding)
 else:
     print("wrong length value")
     exit()

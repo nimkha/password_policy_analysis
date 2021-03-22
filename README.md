@@ -32,6 +32,7 @@ length - Specify min length of password. Must be between 1 - 20 characters
 --startUendD, - Checks if password starts with uppercase and end with digit
 --startUppercase, - Checks if password start with uppercase
 --endDigit, - Checks if password end with digit
+--encoding, - Chose what kind of encoding the password file is. Default is utf-8, choices=[utf-8, utf-16, iso-8859-15]
 ```
 
 ```sh

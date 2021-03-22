@@ -4,7 +4,7 @@
 
 import password_policies as policies
 from charset_normalizer import CharsetNormalizerMatches as CnM
-from charset_normalizer import detect
+# from charset_normalizer import detect
 
 
 # Returns file content from a file as a list using encoding="utf-8" as default
