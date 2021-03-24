@@ -4,7 +4,7 @@
 
 import password_policies as policies
 from charset_normalizer import CharsetNormalizerMatches as CnM
-# from charset_normalizer import detect
+import sys
 
 
 # Returns file content from a file as a list using encoding="utf-8" as default
@@ -19,11 +19,11 @@ def get_file_content(filename, encoding="utf-8"):
 
     except (UnicodeDecodeError, FileNotFoundError) as error:
         if type(error) == UnicodeDecodeError:
-            print("[-] A unicode decode error found => " + str(error))
+            sys.exit("[-] A unicode decode error found => " + str(error))
         elif type(error) == FileNotFoundError:
-            print("[-] File not found")
+            sys.exit("[-] File not found")
         else:
-            print("[-] Unknown error detected => " + str(error))
+            sys.exit("[-] Unknown error detected => " + str(error))
 
 
 # Removes duplicates from list one by one. This can also be done by using sets
